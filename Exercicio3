@@ -1,0 +1,155 @@
+class Main {
+  
+  private No primeiro;
+  private No ultimo;
+  private String lista1;
+  private String lista2;
+  private String lista3;
+  
+  public Main(String nome, String nome2, String nome3){
+    lista1 = nome;
+    lista2 = nome2;
+    lista3 = nome3;
+    primeiro = ultimo = null;
+  }
+
+  public Main(){
+    lista1= "Lista 1";
+    lista2= "Lista 2";
+    lista3= "Lista 3";
+    primeiro = ultimo = null;
+  }
+
+  public void InsereNaFrente(String item){
+    if(Vazia()){
+      primeiro = ultimo = new No(item);
+    }else
+      primeiro = new No(item, primeiro);
+  }
+
+  public void InsereNoFundo(String item){
+    if(Vazia()){
+      primeiro = ultimo = new No(item);
+    }else{
+      ultimo.setProx(new No(item));
+      ultimo = ultimo.getProx();
+  }
+ }
+
+  public String RemoveDaFrente(){
+    if(Vazia())
+    {
+      return null;
+    }
+    String item = primeiro.getDado();
+    
+
+    if(primeiro == ultimo)
+      primeiro = ultimo = null;
+    else
+      primeiro = primeiro.getProx();
+    return item;
+  }
+
+  public String RemoveDoFundo(){
+    if(Vazia())
+    {
+      return null;
+    }
+    String item = ultimo.getDado();
+    
+
+    if(primeiro == ultimo)
+      primeiro = ultimo = null;
+    else
+    {
+      No atual = primeiro;
+
+      while (atual.getProx() != ultimo)
+        atual = atual.getProx();
+
+      ultimo = atual;
+
+      atual.setProx(null);
+    }
+    return item;
+  }
+
+  public boolean Vazia(){
+    return primeiro == null;
+  }
+
+  public String EscreveLista(){
+    String temp = "";
+    if(Vazia()){
+      temp += "Vazia " + lista3;
+      return temp;
+    }
+    temp += "A " + lista3 + " contem \n\n";
+
+    No atual = primeiro;
+
+    while(atual != null){
+      temp += atual.getDado() + ", ";
+      atual = atual.getProx();
+  
+    }
+
+    temp += "\n";
+    return temp;
+  }
+
+  public String exibePrim(){
+    if(primeiro == null)
+    return "Primeiro: null";
+    else
+    return "Primeiro: " + primeiro.getDado(); 
+  }
+
+  public String exibeUlt(){
+    if(ultimo == null)
+    return "Ultimo: null";
+    else
+    return "Ultimo: " + ultimo.getDado();
+  }
+
+  public Main uniao(Main l1, Main l2){
+
+    No atual = l1.primeiro;
+    No atual2 = l2.primeiro;
+
+    Main l3 = new Main();
+
+    while (atual != null){
+
+      l3.InsereNoFundo(atual.getDado());
+      System.out.println(atual.getDado());
+
+      l3.InsereNoFundo(atual2.getDado());
+      System.out.println(atual2.getDado());
+
+      atual = atual.getProx();
+      atual2 = atual2.getProx();
+
+    }
+    return l3;
+  }
+
+  public static void main(String[] args) {
+    Main l1 = new Main();
+    Main l2 = new Main();
+
+    l1.InsereNaFrente("Joao");
+    l1.InsereNaFrente("Maria");
+    l1.InsereNoFundo("Pedro");
+    l1.InsereNaFrente("Carlos");
+
+    l2.InsereNaFrente("Mauricio");
+    l2.InsereNaFrente("Caio");
+    l2.InsereNoFundo("Elyezer");
+    l2.InsereNaFrente("Kevin");
+
+    l1.uniao(l1, l2);
+
+  }
+}
