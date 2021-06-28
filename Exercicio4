@@ -1,0 +1,137 @@
+class Main {
+  
+  private No primeiro;
+  private No ultimo;
+  private String voo;
+  
+  public Main(String nome){
+    voo = nome;
+    primeiro = ultimo = null;
+  }
+
+  public Main(){
+    voo = "Lista Voo";
+    primeiro = ultimo = null;
+  }
+
+  public void InsereNaFrente(String item, int numvoo){
+    if(Vazia()){
+      primeiro = ultimo = new No(item, numvoo);
+    }else
+      primeiro = new No(item, primeiro, numvoo);
+  }
+
+  public void InsereNoFundo(String item, int numvoo){
+    if(Vazia()){
+      primeiro = ultimo = new No(item, numvoo);
+    }else{
+      ultimo.setProx(new No(item, numvoo));
+      ultimo = ultimo.getProx();
+  }
+ }
+
+  public String RemoveDaFrente(){
+    if(Vazia())
+    {
+      return null;
+    }
+    String item = primeiro.getDado();
+    int num = ultimo.getNumvoo();
+
+    if(primeiro == ultimo)
+      primeiro = ultimo = null;
+    else
+      primeiro = primeiro.getProx();
+    return item;
+  }
+
+  public String RemoveDoFundo(){
+    if(Vazia())
+    {
+      return null;
+    }
+    String item = ultimo.getDado();
+    int num = ultimo.getNumvoo();
+
+    if(primeiro == ultimo)
+      primeiro = ultimo = null;
+    else
+    {
+      No atual = primeiro;
+
+      while (atual.getProx() != ultimo)
+        atual = atual.getProx();
+
+      ultimo = atual;
+
+      atual.setProx(null);
+    }
+    return item;
+  }
+
+  public boolean Vazia(){
+    return primeiro == null;
+  }
+
+  public String EscreveLista(){
+    String temp = "";
+    if(Vazia()){
+      temp += "Vazia " + voo;
+      return temp;
+    }
+    temp += "A " + voo + " contem \n\n";
+
+    No atual = primeiro;
+
+    while(atual != null){
+      temp += atual.getDado() + ", " + atual.getNumvoo() + ", ";
+      atual = atual.getProx();
+  
+    }
+
+    temp += "\n";
+    return temp;
+  }
+
+  public String exibePrim(){
+    if(primeiro == null)
+    return "Primeiro: null";
+    else
+    return "Primeiro: " + primeiro.getDado(); 
+  }
+
+  public String exibeUlt(){
+    if(ultimo == null)
+    return "Ultimo: null";
+    else
+    return "Ultimo: " + ultimo.getDado();
+  }
+
+  public int contar(){
+    int contador = 0;
+
+    No atual = primeiro;
+
+    while (atual != null){
+      contador = contador + 1;
+
+      atual = atual.getProx();
+    }
+    return contador;
+  }
+  
+  
+  public static void main(String[] args) {
+    Main l1 = new Main();
+    int resultado;
+
+    l1.InsereNaFrente("Alex", 3);
+    l1.InsereNaFrente("Maria", 5);
+    l1.InsereNoFundo("Pedro", 2);
+    
+    l1.contar();
+
+    System.out.println("Numero de elementos: "+ l1.contar());
+  
+  }
+}
