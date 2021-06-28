@@ -1,0 +1,137 @@
+class Main {
+  
+  private No primeiro;
+  private No ultimo;
+  private String lista1;
+  private String lista2;
+  
+  public Main(String nome, String nome2){
+    lista1 = nome;
+    lista2 = nome2;
+    primeiro = ultimo = null;
+  }
+
+  public Main(){
+    lista1= "Lista 1";
+    lista2= "Lista 2";
+    primeiro = ultimo = null;
+  }
+
+  public void InsereNaFrente(String item){
+    if(Vazia()){
+      primeiro = ultimo = new No(item);
+    }else
+      primeiro = new No(item, primeiro);
+  }
+
+  public void InsereNoFundo(String item){
+    if(Vazia()){
+      primeiro = ultimo = new No(item);
+    }else{
+      ultimo.setProx(new No(item));
+      ultimo = ultimo.getProx();
+  }
+ }
+
+  public String RemoveDaFrente(){
+    if(Vazia())
+    {
+      return null;
+    }
+    String item = primeiro.getDado();
+    
+
+    if(primeiro == ultimo)
+      primeiro = ultimo = null;
+    else
+      primeiro = primeiro.getProx();
+    return item;
+  }
+
+  public String RemoveDoFundo(){
+    if(Vazia())
+    {
+      return null;
+    }
+    String item = ultimo.getDado();
+    
+
+    if(primeiro == ultimo)
+      primeiro = ultimo = null;
+    else
+    {
+      No atual = primeiro;
+
+      while (atual.getProx() != ultimo)
+        atual = atual.getProx();
+
+      ultimo = atual;
+
+      atual.setProx(null);
+    }
+    return item;
+  }
+
+  public boolean Vazia(){
+    return primeiro == null;
+  }
+
+  public String EscreveLista(){
+    String temp = "";
+    if(Vazia()){
+      temp += "Vazia " + lista2;
+      return temp;
+    }
+    temp += "A " + lista2 + " contem \n\n";
+
+    No atual = primeiro;
+
+    while(atual != null){
+      temp += atual.getDado() + ", ";
+      atual = atual.getProx();
+  
+    }
+
+    temp += "\n";
+    return temp;
+  }
+
+  public String exibePrim(){
+    if(primeiro == null)
+    return "Primeiro: null";
+    else
+    return "Primeiro: " + primeiro.getDado(); 
+  }
+
+  public String exibeUlt(){
+    if(ultimo == null)
+    return "Ultimo: null";
+    else
+    return "Ultimo: " + ultimo.getDado();
+  }
+
+  public Main troca(Main l2){
+
+    No atual = primeiro;
+
+    while(atual != null){
+      l2.InsereNaFrente(atual.getDado());
+      atual = atual.getProx();
+    }
+    System.out.println(l2.EscreveLista());
+    return l2;
+  }
+
+  public static void main(String[] args) {
+    Main l1 = new Main();
+    Main l2 = new Main();
+
+    l1.InsereNaFrente("Joao");
+    l1.InsereNaFrente("Maria");
+    l1.InsereNoFundo("Pedro");
+    l1.InsereNaFrente("Carlos");
+
+    l1.troca(l2);
+
+  }
+}
