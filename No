@@ -1,0 +1,82 @@
+No exercicio1-
+public class No{
+  private String dado;
+  private int numvoo;
+  private No prox;
+
+  public No getProx(){
+    return this.prox;
+  }
+
+  public void setProx(No prox){
+    this.prox = prox;
+  }
+
+  public int getNumvoo(){
+    return this.numvoo;
+  }
+
+  public void setNumvoo(int num){
+    this.numvoo = num;
+  }
+
+  public String getDado(){
+    return this.dado;
+  }
+
+  public No(String dadonovo, int num){
+    dado = dadonovo;
+    prox = null;
+    numvoo = num;
+  }
+
+  public No(String dadonovo, No ligacao, int num){
+    dado = dadonovo;
+    prox = ligacao;
+    numvoo = num;
+  }
+}
+
+
+
+
+
+
+No exercicio2-
+public class No{
+  private String dado;
+  private int idade;
+  private No prox;
+
+  public No getProx(){
+    return this.prox;
+  }
+
+  public void setProx(No prox){
+    this.prox = prox;
+  }
+
+  public int getIdade(){
+    return this.idade;
+  }
+
+  public void setIdade(int num){
+    this.idade = idade;
+  }
+
+  public String getDado(){
+    return this.dado;
+  }
+
+  public No(String dadonovo, int num){
+    dado = dadonovo;
+    prox = null;
+    idade = num;
+  }
+
+  public No(String dadonovo, No ligacao, int num){
+    dado = dadonovo;
+    prox = ligacao;
+    idade = num;
+  }
+}
