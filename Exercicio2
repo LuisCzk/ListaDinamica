@@ -1,0 +1,141 @@
+class Main {
+  
+  private No primeiro;
+  private No ultimo;
+  private String ACME;
+  
+  public Main(String nome){
+    ACME = nome;
+    primeiro = ultimo = null;
+  }
+
+  public Main(){
+    ACME = "Lista empresa";
+    primeiro = ultimo = null;
+  }
+
+  public void InsereNaFrente(String item, int idade){
+    if(Vazia()){
+      primeiro = ultimo = new No(item, idade);
+    }else
+      primeiro = new No(item, primeiro, idade);
+  }
+
+  public void InsereNoFundo(String item, int idade){
+    if(Vazia()){
+      primeiro = ultimo = new No(item, idade);
+    }else{
+      ultimo.setProx(new No(item, idade));
+      ultimo = ultimo.getProx();
+  }
+ }
+
+  public String RemoveDaFrente(){
+    if(Vazia())
+    {
+      return null;
+    }
+    String item = primeiro.getDado();
+    int num = ultimo.getIdade();
+
+    if(primeiro == ultimo)
+      primeiro = ultimo = null;
+    else
+      primeiro = primeiro.getProx();
+    return item;
+  }
+
+  public String RemoveDoFundo(){
+    if(Vazia())
+    {
+      return null;
+    }
+    String item = ultimo.getDado();
+    int num = ultimo.getIdade();
+
+    if(primeiro == ultimo)
+      primeiro = ultimo = null;
+    else
+    {
+      No atual = primeiro;
+
+      while (atual.getProx() != ultimo)
+        atual = atual.getProx();
+
+      ultimo = atual;
+
+      atual.setProx(null);
+    }
+    return item;
+  }
+
+  public boolean Vazia(){
+    return primeiro == null;
+  }
+
+  public String EscreveLista(){
+    String temp = "";
+    if(Vazia()){
+      temp += "Vazia " + ACME;
+      return temp;
+    }
+    temp += "A " + ACME + " contem \n\n";
+
+    No atual = primeiro;
+
+    while(atual != null){
+      temp += atual.getDado() + ", " + atual.getIdade() + ", ";
+      atual = atual.getProx();
+  
+    }
+
+    temp += "\n";
+    return temp;
+  }
+
+  public String exibePrim(){
+    if(primeiro == null)
+    return "Primeiro: null";
+    else
+    return "Primeiro: " + primeiro.getDado(); 
+  }
+
+  public String exibeUlt(){
+    if(ultimo == null)
+    return "Ultimo: null";
+    else
+    return "Ultimo: " + ultimo.getDado();
+  }
+
+  public String verifica(String nome){
+
+    No atual = primeiro;
+
+    while (atual != null){
+      if(atual.getDado() == nome){
+        return "Funcionario encontrado: " + nome;
+      }else{
+        atual = atual.getProx(); 
+      }
+    }
+    return "Funcionario não encontrado.";
+  }
+  
+  public static void main(String[] args) {
+    Main l1 = new Main();
+    String result;
+
+    l1.InsereNaFrente("Joao", 33);
+    l1.InsereNaFrente("Maria", 22);
+    l1.InsereNoFundo("Pedro", 30);
+    l1.InsereNaFrente("Carlos", 25);
+    
+    result = l1.verifica("Maria");
+
+    System.out.println(result);
+
+    
+
+  
+  }
+}
